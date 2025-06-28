@@ -1,6 +1,7 @@
 import User from "../models/User.js"
 import FriendRequest from "../models/FriendRequest.js"
 
+
 export async function getRecommendedUsers (request, response) {
     try {
         //in userRoute, protectRoute middleware is called, which adds user and its data fields to request
@@ -21,6 +22,7 @@ export async function getRecommendedUsers (request, response) {
         response.status(500).json({ message: "Server error occurred when fetching recommendations" })
     }
 }
+
 
 export async function getMyFriends (request, response) {
     try {
@@ -104,7 +106,41 @@ export async function acceptFriendRequest(request, response) {
 
         response.status(200).json({ message: "Friend request accepted" })
     } catch (error) {
-        console.error("Error in acceptFriendRequest controller", error)
+        console.error("Error in acceptFriendRequest handler", error)
         response.status(500).json({ message: "Server error occurred when accepting friend request" })
+    }
+}
+
+export async function getFriendRequests(request, response) {
+    try {
+        //find request
+        const incomingRequests = await FriendRequest.find({
+            recipient: request.user.id,
+            status: "pending"
+        }).populate("sender", "fullName profilePic nativeLanguage learningLanguage")
+
+        const acceptedRequests = await FriendRequest.find({
+            sender: request.user.id,
+            status: "accepted"
+        }).populate("recipient", "fullName profilePic")
+
+        response.status(200).json({ incomingRequests, acceptedRequests })
+    } catch(error) {
+        console.error("Error in getFriendResponse handler", error)
+        response.status(500).json({ message: "Server error occurred when getting friend requests" })
+    }
+}
+
+export async function getOutgoingFriendRequests(request, response) {
+    try {
+        const outgoingRequests = await FriendRequest.find({
+            sender: request.user.id,
+            status: "pending"
+        }).populate("recipient", "fullName profilePic nativeLanguage learningLanguage")
+
+        response.status(200).json({ outgoingRequests })
+    } catch(error) {
+        console.error("Error in getOutgoingFriendRequests handler", error)
+        response.status(500).json({ message: "Server error occurred when getting outgoing friend requests" })
     }
 }
