@@ -14,7 +14,7 @@ app.use(cookieParser())
 
 //mount routes to route prefix: /api/auth
 app.use("/api/auth", authRoutes)
-app.use("/api/auth", userRoutes)
+app.use("/api/users", userRoutes)
 
 
 const PORT = process.env.PORT
