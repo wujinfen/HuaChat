@@ -1,7 +1,5 @@
 import User from "../models/User.js"
-
-
-
+import FriendRequest from "../models/FriendRequest.js"
 
 export async function getRecommendedUsers (request, response) {
     try {
@@ -20,7 +18,7 @@ export async function getRecommendedUsers (request, response) {
         response.status(200).json(recommendedUsers)
     } catch (error) {
         console.error("Error in getRecommendedUsers controller", error)
-        response.status(500).json({ message: "Server error occurred when fetching recommendations "})
+        response.status(500).json({ message: "Server error occurred when fetching recommendations" })
     }
 }
 
@@ -32,6 +30,48 @@ export async function getMyFriends (request, response) {
         response.status(200).json(user.friends)
     } catch (error) {
         console.error("Error in getMyFriends controller", error)
-        response.status(500).json({ message: "Server error occurred when fetching friends "})
+        response.status(500).json({ message: "Server error occurred when fetching friends" })
+    }
+}
+
+
+export async function sendFriendRequest(request, response) {
+    try {
+        const myId = request.user.id
+        const recipientId = request.params.id //get dynamic id from route
+
+        if (myId === recipientId) {
+            return response.status(400).json({ message: "Cannot send friend request to yourself" })
+        }
+
+        const recipient = await User.findById(recipientId)
+        if (!recipient) {
+            return response.status(404).json({ message: "Recipient not found" })
+        }
+        if (recipient.friends.includes(myId)) {
+            return response.status(400).json({ message: `Already friends with ${recipient.fullName}` })
+        }
+        
+        const existingRequest = await FriendRequest.findOne({
+            $or: [
+                {sender: myId, recipient: recipientId},
+                {sender: recipientId, recipient: myId},
+            ],
+        })
+        if (existingRequest) {
+            return response.status(400).json({ message: "There is already a friend request between you and this user" })
+        }
+
+        //once all error checks pass, we create and save a new valid friend request
+        const friendRequest = new FriendRequest({
+            sender: myId,
+            recipient: recipientId,
+        })
+        await friendRequest.save()
+
+        response.status(201).json(friendRequest)
+    } catch (error) {
+        console.error("Error in getMyFriends controller", error)
+        response.status(500).json({ message: "Server error occurred when sending friend request" })
     }
 }
