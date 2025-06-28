@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
-//mount routes to route prefix: /api/auth
+//mount routes to route prefix
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
 
