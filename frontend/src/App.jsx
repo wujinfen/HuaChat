@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from "react-router"
+import { Route, Routes, Navigate } from "react-router"
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { axiosService } from './lib/axios.js'
 
