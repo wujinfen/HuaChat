@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { axiosService } from "./lib/axios.js"
+import { axiosService } from "../lib/axios.js"
 
 const SignupPage = () => {
   return (

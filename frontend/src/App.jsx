@@ -1,5 +1,7 @@
 import React from 'react'
 import { Route, Routes } from "react-router"
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { axiosService } from './lib/axios.js'
 
 import { Toaster } from "react-hot-toast"
 import toast from "react-hot-toast"
@@ -14,7 +16,19 @@ import OnboardingPage from "./pages/OnboardingPage.jsx"
 
 const App = () => {
 
-  
+  //tanstack query
+  //once user logs in and gets authenticated, we keep the user state in memory in the root App component 
+    //this state is global and allows the rest of the app and pages to trust the authenticated user and avoids repeating the '/auth/me' checks on every page
+  const { data:authData, isLoading, error } = useQuery({
+    queryKey: ["authUser"],
+    queryFn: async () => {
+      const response = await axiosService.get("/auth/me")
+      return response.data
+    },
+    retry: false //doesn't call endpoint multiple times on auth failure
+  }) 
+  const authUser = authData?.user
+
   return (
     <div className="h-screen" data-theme="dark">
       <div><Toaster/></div> {/* this adds Toaster to app (react notification)*/}
@@ -22,13 +36,15 @@ const App = () => {
 
       {/* these are URL based routes in our frontend App that routes to the pages in src/pages */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/notifications" element={<NotificationsPage />} />
-        <Route path="/call" element={<CallPage />} />
-        <Route path="/chat" element={<ChatPage />} />
-        <Route path="/onboarding" element={<OnboardingPage />} />
+        {/* <Route path="/sample-url" element={<SamplePage />} />  */} 
+        {/* if user is logged in and authenticated then they have access to specific pages */} 
+        <Route path="/" element={ authUser ? <HomePage /> : <Navigate to="/login" /> } />
+        <Route path="/signup" element={ !authUser ? <SignupPage /> : <Navigate to="/" /> } />
+        <Route path="/login" element={ !authUser ? <LoginPage /> : <Navigate to = "/" /> } />
+        <Route path="/notifications" element={ authUser ? <NotificationsPage /> : <Navigate to="/login" /> } />
+        <Route path="/call" element={ authUser ? <CallPage /> : <Navigate to="/login" /> } />
+        <Route path="/chat" element={ authUser ? <ChatPage /> : <Navigate to="/login" /> } />
+        <Route path="/onboarding" element={ authUser ? <OnboardingPage /> : <Navigate to="/login" />}  />
       </Routes>
     
       
