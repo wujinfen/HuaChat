@@ -5,11 +5,12 @@ Backend Technologies:
 -MongoDB w/ mongoose
 -Node.js
 -Express.js
--bcrypt and JWT
--StreamChat API
+-bcrypt and JWT for password hashing and user authentication
+-StreamChat API for chat and video calling
 
 Frontend Technologies:
 
 -React
--Tailwind CSS w/ daisyUI
--react-hot-toast
+-Tanstack Query w/ axios http client for api calls
+-Tailwind CSS w/ daisyUI for styling and components
+-react-hot-toast for notifications

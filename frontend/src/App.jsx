@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Routes } from "react-router"
+
 import { Toaster } from "react-hot-toast"
 import toast from "react-hot-toast"
 
@@ -12,6 +13,8 @@ import ChatPage from "./pages/ChatPage.jsx"
 import OnboardingPage from "./pages/OnboardingPage.jsx"
 
 const App = () => {
+
+  
   return (
     <div className="h-screen" data-theme="dark">
       <div><Toaster/></div> {/* this adds Toaster to app (react notification)*/}
@@ -29,7 +32,6 @@ const App = () => {
       </Routes>
     
       
-    
     </div>
     
   )
