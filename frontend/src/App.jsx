@@ -6,6 +6,8 @@ import { axiosService } from './lib/axios.js'
 import { Toaster } from "react-hot-toast"
 import toast from "react-hot-toast"
 
+import PageLoader from './components/PageLoader.jsx'
+
 import HomePage from "./pages/HomePage.jsx"
 import SignupPage from "./pages/SignupPage.jsx"
 import LoginPage from "./pages/LoginPage.jsx"
@@ -19,7 +21,7 @@ const App = () => {
   //tanstack query
   //once user logs in and gets authenticated, we keep the user state in memory in the root App component 
     //this state is global and allows the rest of the app and pages to trust the authenticated user and avoids repeating the '/auth/me' checks on every page
-  const { data:authData, isLoading, error } = useQuery({
+  const { data:authData, isLoading } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
       const response = await axiosService.get("/auth/me")
@@ -28,6 +30,8 @@ const App = () => {
     retry: false //doesn't call endpoint multiple times on auth failure
   }) 
   const authUser = authData?.user
+
+  if (isLoading) return <PageLoader /> 
 
   return (
     <div className="h-screen" data-theme="dark">
