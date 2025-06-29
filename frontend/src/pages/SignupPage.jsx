@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router"
 
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+
 import { axiosService } from "../lib/axios.js"
 
 import { ShipWheelIcon } from "lucide-react"
@@ -12,12 +14,22 @@ const SignupPage = () => {
     password: "",
   })
 
+  const queryClient = useQueryClient() //gives access to the global query cache
+
+  //we use tanstack useMutation for any operation that changes data and POST
+  const { mutate, isPending, error } = useMutation({ //mutate is returned function to trigger mutation, isPending says if request is currently in flight
+    mutationFn: async () => { //sends client POST request to our signup endpoint with user signup data
+      const response = await axiosService.post("/auth/signup", signupData) 
+      return response.data 
+    },
+    onSuccess:() => queryClient.invalidateQueries({ queryKey: ["authUser"] }), //this says authUser is stale since data has changed so it re-runs the /auth/me GET request in App.jsx 
+  })
+
+  //when signup form submitted, this is called, which sends form data and the POST request to create a new user
   const handleSignup = (e) => {
-    e.preventDefault()
+    e.preventDefault() //don't refresh page on submit
+    mutate() //call our mutationFn
   }
-
-  console.log("signup page")
-
 
 
   return (
@@ -35,6 +47,13 @@ const SignupPage = () => {
             </span>
           </div>
 
+          {/* ERROR MESSAGE */}
+          {error && (
+            <div className="alert alert-error mb-4">
+              <span>{error.response.data.message}</span> {/* error comes from axios, which comes from backend endpoints */}
+            </div>
+          )}
+
           <div className="w-full">
             <form onSubmit={handleSignup}>
               <div className="space-y-4">
@@ -43,7 +62,7 @@ const SignupPage = () => {
                   <p>Connect with friends</p>
                 </div>
 
-                {/* SIGNNUP FORMS */}
+                {/* SIGNUP FORMS */}
                 <div className="space-y-3">
 
                   {/* FULLNAME */}
@@ -68,7 +87,7 @@ const SignupPage = () => {
                     </label>
                     <input
                       type="email"
-                      placeholder="john@gmail.com"
+                      placeholder="example@gmail.com"
                       className="input input-bordered w-full"
                       value={signupData.email}
                       onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
@@ -107,9 +126,16 @@ const SignupPage = () => {
                   </div>
                 </div>
 
+                {/* visual spinner when user clicks create account */}
                 <button className="btn btn-primary w-full" type="submit">
-                  Create Account
+                  {isPending ? (
+                    <>
+                      <span className="loading loading-spinner loading-xs"></span>
+                    </>
+                  ) : ( "Create Account" )}
                 </button>
+
+
 
                 <div className="text-center mt-4">
                   <p className="text-sm">
