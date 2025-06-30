@@ -12,5 +12,6 @@ Frontend Technologies:
 
 -React
 -Tanstack Query w/ axios http client for api calls
+-Zustand for global state
 -Tailwind CSS w/ daisyUI for styling and components
 -react-hot-toast for notifications

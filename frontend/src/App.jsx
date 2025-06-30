@@ -16,6 +16,7 @@ import NotificationsPage from "./pages/NotificationsPage.jsx"
 import CallPage from "./pages/CallPage.jsx"
 import ChatPage from "./pages/ChatPage.jsx"
 import OnboardingPage from "./pages/OnboardingPage.jsx"
+import { useThemeStore } from './store/useThemeStore.js'
 
 const App = () => {
 
@@ -33,10 +34,12 @@ const App = () => {
   const authUser = authData?.user
   const isOnboarded = authUser?.isOnboarded
 
+  const { theme, setTheme } = useThemeStore() //global zustand theme variable
+
   if (isLoading) return <PageLoader /> 
 
   return (
-    <div className="h-screen" data-theme="dark">
+    <div className="h-screen" data-theme={theme}>
       <div><Toaster/></div> {/* this adds Toaster to app (react notification)*/}
       {/* <button onClick={()=>toast.success("button clicked")}>SAMPLE TOAST</button> */}
 
