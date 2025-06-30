@@ -11,8 +11,8 @@ export async function getRecommendedUsers (request, response) {
         const recommendedUsers = await User.find({
             $and: [
                 {_id: {$ne: currentUserId}}, //not current user
-                {$id: {$nin: currentUser.friends}}, //not current user's friend
-                {isOnboarded: true}
+                {_id: {$nin: currentUser.friends}}, //not current user's friend
+                {isOnboarded: true} //can remove to not show onboarded accounts
             ]
         })
 

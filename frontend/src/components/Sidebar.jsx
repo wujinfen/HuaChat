@@ -39,17 +39,17 @@ const Sidebar = () => {
             <nav className="flex-1 p-4 space-y-1">
                 <Link to="/" className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/" ? "btn-active" : ""}`}>
                     <HomeIcon className="size-5 text-base-content opacity-70" />
-                    <span>home</span>
+                    <span>Home</span>
                 </Link>
 
                 <Link to="/friends" className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/friends" ? "btn-active" : ""}`}>
                     <UsersIcon className="size-5 text-base-content opacity-70" />
-                    <span>friends</span>
+                    <span>Friends</span>
                 </Link>
 
                 <Link to="/notifications" className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/notifications" ? "btn-active" : ""}`}>
                     <BellIcon className="size-5 text-base-content opacity-70" />
-                    <span>notifications</span>
+                    <span>Notifications</span>
                 </Link>
             </nav>
 
