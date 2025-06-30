@@ -45,10 +45,19 @@ const App = () => {
         {/* if user is logged in and authenticated then they have access to specific pages */} 
         <Route path="/" element={ authUser && isOnboarded ? ( <HomePage />) : 
           (<Navigate to={!authUser ? "/login" : "/onboarding"} /> )} />
-        <Route path="/signup" element={ !authUser ? <SignupPage /> : <Navigate to="/" /> } />
-        <Route path="/login" element={ !authUser ? <LoginPage /> : <Navigate to = "/" /> } />
+
+        <Route path="/signup" element={ !authUser ? <SignupPage /> : <Navigate to={ 
+          isOnboarded ? "/" : "/onboarding"
+        } /> } />
+
+        <Route path="/login" element={ !authUser ? <LoginPage /> : <Navigate to={ 
+          isOnboarded ? "/" : "/onboarding"
+        } /> } />
+
         <Route path="/notifications" element={ authUser ? <NotificationsPage /> : <Navigate to="/login" /> } />
+
         <Route path="/call" element={ authUser ? <CallPage /> : <Navigate to="/login" /> } />
+        
         <Route path="/chat" element={ authUser ? <ChatPage /> : <Navigate to="/login" /> } />
 
         <Route path="/onboarding"

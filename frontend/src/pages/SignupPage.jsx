@@ -164,7 +164,7 @@ const SignupPage = () => {
             </div>
 
             <div className="text-center space-y-3 mt-6">
-              <h2 className="text-xl font-semibold">Connect with everyone</h2>
+              <h2 className="text-xl font-semibold">Have a conversation</h2>
               <p className="opacity-70">
                 Connect with friends, build communities, share your story
               </p>

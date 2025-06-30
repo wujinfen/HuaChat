@@ -99,7 +99,7 @@ const OnboardingPage = () => {
               <div className="flex items-center gap-2">
                 <button type="button" onClick={handleRandomAvatar} className="btn btn-neutral">
                   <ShuffleIcon className="size-4 mr-2" />
-                  Generate Random Avatar
+                  Generate Avatar
                 </button>
               </div>
             </div>
