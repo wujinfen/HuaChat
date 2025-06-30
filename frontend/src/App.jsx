@@ -8,6 +8,7 @@ import toast from "react-hot-toast"
 
 import PageLoader from './components/PageLoader.jsx'
 
+import Layout from "./components/Layout.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import SignupPage from "./pages/SignupPage.jsx"
 import LoginPage from "./pages/LoginPage.jsx"
@@ -43,8 +44,9 @@ const App = () => {
       <Routes>
         {/* <Route path="/sample-url" element={<SamplePage />} />  */} 
         {/* if user is logged in and authenticated then they have access to specific pages */} 
-        <Route path="/" element={ authUser && isOnboarded ? ( <HomePage />) : 
-          (<Navigate to={!authUser ? "/login" : "/onboarding"} /> )} />
+        <Route path="/" element={ authUser && isOnboarded ? ( 
+          <Layout showSidebar={true}> <HomePage /> </Layout>
+        ) : (<Navigate to={!authUser ? "/login" : "/onboarding"} /> )} />
 
         <Route path="/signup" element={ !authUser ? <SignupPage /> : <Navigate to={ 
           isOnboarded ? "/" : "/onboarding"
@@ -57,7 +59,7 @@ const App = () => {
         <Route path="/notifications" element={ authUser ? <NotificationsPage /> : <Navigate to="/login" /> } />
 
         <Route path="/call" element={ authUser ? <CallPage /> : <Navigate to="/login" /> } />
-        
+
         <Route path="/chat" element={ authUser ? <ChatPage /> : <Navigate to="/login" /> } />
 
         <Route path="/onboarding"
