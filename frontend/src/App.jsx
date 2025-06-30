@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div className="h-screen" data-theme="dark">
       <div><Toaster/></div> {/* this adds Toaster to app (react notification)*/}
-      <button onClick={()=>toast.success("button clicked")}>SAMPLE TOAST</button>
+      {/* <button onClick={()=>toast.success("button clicked")}>SAMPLE TOAST</button> */}
 
       {/* these are URL based routes in our frontend App that routes to the pages in src/pages */}
       <Routes>
