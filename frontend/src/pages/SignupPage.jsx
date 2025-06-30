@@ -15,7 +15,6 @@ const SignupPage = () => {
   })
 
   const queryClient = useQueryClient() //gives access to the global query cache
-
   //we use tanstack useMutation for any operation that changes data and POST
   const { mutate, isPending, error } = useMutation({ //mutate is returned function to trigger mutation, isPending says if request is currently in flight
     mutationFn: async () => { //sends client POST request to our signup endpoint with user signup data
