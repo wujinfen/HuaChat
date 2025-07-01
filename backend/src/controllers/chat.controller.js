@@ -1,6 +1,5 @@
 import { generateStreamToken } from "../lib/Stream.js"
 
-
 export async function getStreamToken(request, response) {
     try {
         const token = generateStreamToken(request.user.id)

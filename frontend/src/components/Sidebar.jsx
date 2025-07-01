@@ -23,7 +23,6 @@ const Sidebar = () => {
     const currentPath = location.pathname
     
 
-
     // TODO: redesign 
     return (
         <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
