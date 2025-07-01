@@ -4,7 +4,6 @@ import { axiosService } from "../lib/axios"
 import { UserCheckIcon, BellIcon, ClockIcon } from "lucide-react"
 import NoNotificationsFound from "../components/NoNotificationsFound"
 
-
 const NotificationsPage = () => {
 
   const queryClient = useQueryClient()
