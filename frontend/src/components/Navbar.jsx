@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { axiosService } from "../lib/axios.js"
 
 import ThemeSelector from "./ThemeSelector.jsx"
-import { ShipWheelIcon, BellIcon, LogOutIcon } from "lucide-react"
+import { BellIcon, LogOutIcon } from "lucide-react"
 
 const Navbar = () => {
     
@@ -42,10 +42,7 @@ const Navbar = () => {
                 {isChatPage && (
                 <div className="pl-5">
                     <Link to="/" className="flex items-center gap-2.5">
-                        <ShipWheelIcon className="size-9 text-primary" />
-                        <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary  tracking-wider">
-                            Hua
-                        </span>
+                        <img src ="/hua1.png" alt="hua logo" width="60" height="100" />
                     </Link>
                 </div>
                 )}
