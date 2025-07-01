@@ -144,3 +144,31 @@ export async function getOutgoingFriendRequests(request, response) {
         response.status(500).json({ message: "Server error occurred when getting outgoing friend requests" })
     }
 }
+
+export async function searchUsers(request, response) {
+  try {
+    const query = request.query.query?.toLowerCase();
+    const currentUserId = request.user.id;
+
+    if (!query || query.trim() === "") {
+      return response.status(400).json({ message: "Search query required" });
+    }
+
+    const users = await User.find({
+      $and: [
+        { _id: { $ne: currentUserId } },
+        {
+          $or: [
+            { fullName: { $regex: query, $options: "i" } },
+            { email: { $regex: query, $options: "i" } }
+          ]
+        }
+      ]
+    }).limit(10).select("fullName email profilePic");
+
+    response.status(200).json(users);
+  } catch (error) {
+    console.error("Error in searchUsers controller", error);
+    response.status(500).json({ message: "Server error occurred when searching users" });
+  }
+}

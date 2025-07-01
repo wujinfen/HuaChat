@@ -141,8 +141,6 @@ const NotificationsPage = () => {
         )}
 
       </div>
-
-
     </div>
   )
 }

@@ -16,6 +16,7 @@ import NotificationsPage from "./pages/NotificationsPage.jsx"
 import CallPage from "./pages/CallPage.jsx"
 import ChatPage from "./pages/ChatPage.jsx"
 import OnboardingPage from "./pages/OnboardingPage.jsx"
+import SearchFriends from './pages/SearchFriends.jsx'
 import { useThemeStore } from './store/useThemeStore.js'
 
 const App = () => {
@@ -58,6 +59,13 @@ const App = () => {
         <Route path="/login" element={ !authUser ? <LoginPage /> : <Navigate to={ 
           isOnboarded ? "/" : "/onboarding"
         } /> } />
+
+        {/* TODO: CREATE THE SearchFriends Page*/}
+        <Route path="/friends" element={ authUser && isOnboarded ? (
+          <Layout showSidebar={true}> <SearchFriends /> </Layout>
+        ) : (
+          <Navigate to={!authUser ? "/login" : "/onboarding"} />
+        ) } />
 
         <Route path="/notifications" element={ authUser && isOnboarded ? (
           <Layout showSidebar={true}> <NotificationsPage /> </Layout>
