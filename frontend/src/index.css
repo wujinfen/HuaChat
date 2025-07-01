@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles below are for Stream Chat in ChatPage  */
+
 .str-chat__channel {
   display: flex;
   align-items: center;

@@ -10,7 +10,8 @@ import { Channel, ChannelHeader, Chat, MessageInput, MessageList, Thread, Window
 
 import toast from "react-hot-toast"
 
-import ChatLoader from "../components/ChatLoader"
+import ChatLoader from "../components/ChatLoader.jsx"
+import CallButton from "../components/CallButton.jsx"
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY
 
@@ -98,7 +99,7 @@ const ChatPage = () => {
       <Chat client={chatClient} > {/* this is why we need states for the chatClient and channel, that way it can save the state and re-render when the async setup is done*/}
         <Channel channel={channel}>
           <div className="w-full relative">
-            {/* <CallButton handleVideoCall={handleVideoCall} */}
+            <CallButton handleVideoCall={handleVideoCall} />
             <Window>
               <ChannelHeader />
               <MessageList />
