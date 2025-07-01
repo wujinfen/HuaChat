@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosService } from "../lib/axios";
+
+import { motion, AnimatePresence } from "framer-motion"
 import toast from "react-hot-toast";
 import { UserPlusIcon, CheckCircleIcon } from "lucide-react";
+
 
 const SearchFriendsPage = () => {
   const queryClient = useQueryClient();
@@ -71,7 +74,8 @@ const SearchFriendsPage = () => {
         {results.map((user) => {
           const alreadySent = outgoingIds.has(user._id);
           return (
-            <div key={user._id} className="card bg-base-200 p-3 flex flex-row justify-between items-center ">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }}
+                key={user._id} className="card bg-base-200 p-3 flex flex-row justify-between items-center ">
               <div className="avatar size-16 rounded-full">
                     <img src={user.profilePic} alt={user.fullName} />
               </div>
@@ -96,7 +100,7 @@ const SearchFriendsPage = () => {
                   </>
                 )}
               </button>
-            </div>
+            </motion.div>
           );
         })}
       </div>
