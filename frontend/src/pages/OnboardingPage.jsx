@@ -11,6 +11,9 @@ import { BadgeCheck, ShuffleIcon, MapPinIcon, LoaderIcon } from "lucide-react"
 import { LANGUAGES } from "../constants/constants.js"
 
 const OnboardingPage = () => {
+
+  // TODO: check state for language logic -- remove
+
   const queryClient = useQueryClient() //gives access to the global query cache
     const { data:authData, isLoading } = useQuery({
     queryKey: ["authUser"],
@@ -66,13 +69,12 @@ const OnboardingPage = () => {
     toast.success("Random profile picture generated!");
   }
 
-  //TODO: change onboarding forms
-  //TODO: change the languages form and the constants in constants/constants.js
+
   return (
     <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
       <div className="card bg-base-200 w-full max-w-3xl shadow-xl">
         <div className="card-body p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Add a profile</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Complete your profile</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
              {/* PROFILE PIC CONTAINER */}
@@ -126,7 +128,7 @@ const OnboardingPage = () => {
                 value={formState.bio}
                 onChange={(e) => setFormState({ ...formState, bio: e.target.value })}
                 className="textarea textarea-bordered h-24"
-                placeholder="Tell others about yourself and your language learning goals"
+                placeholder="Tell others about yourself"
               />
             </div>
 
