@@ -1,18 +1,13 @@
-Tech Stack:
+## [Hua – A Modern Social Messaging App](https://www.huachat.org/login)
 
-Backend Technologies: 
+Hua is a fullstack MERN application that lets users add friends, send friend requests, chat via text and video, and share images—all within a sleek and animated interface. Built for simplicity and speed, Hua connects people in real-time through a secure and intuitive platform.
+![Demo GIF](./frontend/public/demogif.gif)
 
-
--MongoDB w/ mongoose
--Node.js
--Express.js
--bcrypt and JWT for password hashing and user authentication
--StreamChat API for chat and video calling
-
-Frontend Technologies:
-
--React
--Tanstack Query w/ axios http client for api calls
--Zustand for global state
--Tailwind CSS w/ daisyUI for styling and components
--react-hot-toast for notifications
+## Features
+- 💬 Real-time text chat
+- 📹 One-on-one video calls via Stream API
+- 🖼️ Image and media sharing in chats
+- 🔒 JWT-based authentication and secure login, bcrypt for encryption
+- 👥 Friend requests and contact management
+- ✅ Modern and smooth UI made with Tailwind, DaisyUI, and Framer-Motion - with A LOT of themes!
+- ⚡ Optimized data fetching with TanStack Query and axios
