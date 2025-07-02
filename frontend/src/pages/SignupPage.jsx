@@ -5,8 +5,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { axiosService } from "../lib/axios.js"
 
-import { ShipWheelIcon } from "lucide-react"
-
 const SignupPage = () => {
   const [signupData, setSignupData] = useState({
     fullName: "",
@@ -32,18 +30,14 @@ const SignupPage = () => {
 
 
   return (
-    <div className="h-screen flex items-center justify-center p-4 sm:p-6 md:p-8" data-theme="dark">
-      { /* TODO: REDESIGN SIGNUP */}
+    <div className="h-screen flex items-center justify-center p-4 sm:p-6 md:p-8" data-theme="cupcake">
       <div className="border border-primary/25 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100 rounded-xl shadow-lg overflow-hidden">
 
         {/* Signup form - left side*/}
         <div className="w-full lg:w-1/2 p-4 sm-:p-8 flex flex-col">
-          {/* LOGO - TODO: REPLACE THIS WITH CUSTOM ICON */}
+          {/* LOGO */}
           <div className="mb-4 flex items-center justify-start gap-2">
-            <ShipWheelIcon className="size-9 text-primary" /> 
-            <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
-              HuaChat
-            </span>
+            <img src="/hualogo.png" alt="Hua Chat Logo"/>
           </div>
 
           {/* ERROR MESSAGE */}
@@ -57,8 +51,8 @@ const SignupPage = () => {
             <form onSubmit={handleSignup}>
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-xl font-semibold">Create an Account</h2>
-                  <p>Connect with friends</p>
+                  <h2 className="text-xl font-semibold">Create an Account, its free</h2>
+                  <p>Talk Freely, Hua Easily</p>
                 </div>
 
                 {/* SIGNUP FORMS */}
@@ -159,14 +153,14 @@ const SignupPage = () => {
         <div className="hidden lg:flex w-full lg:w-1/2 bg-primary/10 items-center justify-center">
           <div className="max-w-md p-8">
             {/* Illustration */}
-            <div className="relative aspect-square max-w-sm mx-auto">
-              <img src="/Hello-rafiki.svg" alt="Language connection illustration" className="w-full h-full" />
+            <div className="relative aspect-square max-w-sm mx-auto mt-8">
+              <img src="/demogif2.gif" alt="App demo gif" className="rounded-lg w-full h-[280px] mb-8" />
             </div>
 
-            <div className="text-center space-y-3 mt-6">
-              <h2 className="text-xl font-semibold">Have a conversation</h2>
+            <div className="text-center space-y-3 mt">
+              <h2 className="text-xl font-semibold">Moments Shared, Memories Made</h2>
               <p className="opacity-70">
-                Connect with friends, build communities, share your story
+                With Hua, you can add friends, jump into seamless video calls, text chat, and even share images—all in one place.
               </p>
             </div>
           </div>

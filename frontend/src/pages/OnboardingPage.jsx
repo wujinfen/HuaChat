@@ -6,10 +6,7 @@ import { axiosService } from "../lib/axios.js"
 
 import toast from "react-hot-toast"
 
-import { ShuffleIcon } from "lucide-react"
-import { MapPinIcon } from "lucide-react"
-import { ShipWheelIcon } from "lucide-react"
-import { LoaderIcon } from "lucide-react"
+import { BadgeCheck, ShuffleIcon, MapPinIcon, LoaderIcon } from "lucide-react"
 
 import { LANGUAGES } from "../constants/constants.js"
 
@@ -75,7 +72,7 @@ const OnboardingPage = () => {
     <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
       <div className="card bg-base-200 w-full max-w-3xl shadow-xl">
         <div className="card-body p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Tell us about yourself</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Add a profile</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
              {/* PROFILE PIC CONTAINER */}
@@ -134,9 +131,11 @@ const OnboardingPage = () => {
             </div>
 
 
+          
             {/* LANGUAGES */}
+            {/* 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* NATIVE LANGUAGE */}
+              
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Native Language</span>
@@ -156,7 +155,6 @@ const OnboardingPage = () => {
                 </select>
               </div>
 
-              {/* LEARNING LANGUAGE */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Learning Language</span>
@@ -176,6 +174,7 @@ const OnboardingPage = () => {
                 </select>
               </div>
             </div>
+           */}
 
             {/* LOCATION */}
             <div className="form-control">
@@ -200,8 +199,8 @@ const OnboardingPage = () => {
             <button className="btn btn-primary w-full" disabled={isPending} type="submit">
               {!isPending ? (
                 <>
-                  <ShipWheelIcon className="size-5 mr-2" />
-                  Complete Onboarding
+                  <BadgeCheck className="size-5 mr-2" />
+                  Continue
                 </>
               ) : (
                 <>
